@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convite - Atlas Ravi</title>
+    
+    <!-- Importando fontes do Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lilita+One&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Importando Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Configurando cores personalizadas do Tailwind para bater com a imagem -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'car-blue': '#2298c3',
+                        'car-window': '#99d6ea',
+                        'car-orange': '#f48120',
+                        'car-wheel-dark': '#4a4a4a',
+                        'car-wheel-light': '#d1d5db',
+                        'text-blue': '#2b9bc6',
+                        'text-cyan': '#45c4d0',
+                        'text-yellow': '#fcd34d',
+                        'text-orange': '#f48120',
+                        'text-green': '#84cc9c',
+                        'grid-line': '#eef2f6'
+                    },
+                    fontFamily: {
+                        'title': ['"Lilita One"', 'cursive'],
+                        'body': ['"Lora"', 'serif'],
+                        'name': ['"Dancing Script"', 'cursive'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Estilo do fundo quadriculado (papel milimetrado) */
+        .bg-grid {
+            background-color: #ffffff;
+            background-image: 
+                linear-gradient(to right, #eef2f6 1px, transparent 1px),
+                linear-gradient(to bottom, #eef2f6 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* Sombras leves nas letras do título para dar profundidade */
+        .title-shadow {
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+        }
+
+        /* --- Novas Animações (Mais lentas e suaves) --- */
+        .anim-hidden { opacity: 0; }
+        
+        @keyframes driveIn {
+            0% { transform: translateX(-150vw) rotate(0deg); opacity: 1; }
+            50% { transform: translateX(5%) rotate(-2deg); opacity: 1; }
+            75% { transform: translateX(-1%) rotate(1deg); opacity: 1; }
+            100% { transform: translateX(0) rotate(0deg); opacity: 1; }
+        }
+        
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            60% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            0% { transform: translateY(20px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 flex items-center justify-center min-h-screen p-2 md:p-4 overflow-x-hidden">
+
+    <!-- Container Principal (Engloba o Convite e a Pista) -->
+    <div id="main-card" class="w-full max-w-4xl rounded-xl relative flex flex-row transition-all duration-1000 z-10 bg-transparent">
+        
+        <!-- Lado Esquerdo: Informações do Convite -->
+        <div class="flex-1 p-4 sm:p-8 md:p-10 text-center flex flex-col items-center justify-center z-20">
+            
+            <!-- Título BEEP BEEP!!! -->
+            <h1 id="title-text" class="font-title text-4xl sm:text-5xl md:text-6xl tracking-wider mb-6 flex flex-wrap justify-center gap-1 title-shadow">
+                <div class="flex">
+                    <span class="text-text-blue anim-hidden">B</span>
+                    <span class="text-text-cyan anim-hidden">E</span>
+                    <span class="text-text-yellow anim-hidden">E</span>
+                    <span class="text-text-orange mr-2 anim-hidden">P</span>
+                </div>
+                <div class="flex">
+                    <span class="text-text-cyan anim-hidden">B</span>
+                    <span class="text-text-orange anim-hidden">E</span>
+                    <span class="text-text-yellow anim-hidden">E</span>
+                    <span class="text-text-blue mr-1 anim-hidden">P</span>
+                </div>
+                <div class="flex">
+                    <span class="text-text-cyan anim-hidden">!</span>
+                    <span class="text-text-yellow anim-hidden">!</span>
+                    <span class="text-text-orange anim-hidden">!</span>
+                </div>
+            </h1>
+
+            <!-- Texto de Introdução -->
+            <p id="intro-text" class="font-body text-gray-700 text-sm sm:text-base md:text-xl leading-relaxed mb-8 max-w-sm min-h-[4rem] sm:min-h-[5rem] md:min-h-[6rem] anim-hidden">
+            </p>
+
+            <!-- Ilustração do Carrinho (SVG) -->
+            <div id="main-car" class="w-full max-w-[200px] sm:max-w-[280px] mb-4 anim-hidden" style="opacity: 0;">
+                <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto drop-shadow-md">
+                    <!-- Fumaça -->
+                    <g fill="#e2e8f0">
+                        <circle cx="45" cy="115" r="16"/>
+                        <circle cx="28" cy="105" r="12"/>
+                        <circle cx="40" cy="95" r="14"/>
+                        <circle cx="15" cy="115" r="8"/>
+                    </g>
+
+                    <!-- Para-choque traseiro (Laranja) -->
+                    <rect x="55" y="95" width="20" height="20" rx="8" fill="#f48120"/>
+                    
+                    <!-- Farol dianteiro (Amarelo) -->
+                    <path d="M 265 95 a 10 10 0 0 1 10 10 a 10 10 0 0 1 -10 10 z" fill="#fcd34d"/>
+
+                    <!-- Parte superior do carro (Azul) -->
+                    <path d="M 75 85 C 80 40, 140 15, 175 15 C 220 15, 245 40, 260 85 Z" fill="#2298c3"/>
+
+                    <!-- Janela Esquerda -->
+                    <path d="M 90 85 C 95 45, 145 30, 160 30 L 160 85 Z" fill="#99d6ea"/>
+
+                    <!-- Janela Direita -->
+                    <path d="M 172 85 L 172 30 C 190 30, 230 45, 243 85 Z" fill="#99d6ea"/>
+
+                    <!-- Parte inferior do carro (Laranja) -->
+                    <rect x="65" y="85" width="205" height="40" rx="20" fill="#f48120"/>
+
+                    <!-- Pneus (Cinza Escuro) -->
+                    <circle cx="115" cy="125" r="32" fill="#4a4a4a"/>
+                    <circle cx="220" cy="125" r="32" fill="#4a4a4a"/>
+
+                    <!-- Calotas (Cinza Claro) -->
+                    <circle cx="115" cy="125" r="16" fill="#d1d5db"/>
+                    <circle cx="220" cy="125" r="16" fill="#d1d5db"/>
+                </svg>
+            </div>
+
+            <!-- Nome do Aniversariante -->
+            <h2 id="name-text" class="font-name text-text-blue text-5xl sm:text-7xl md:text-8xl mt-2 mb-8 md:mb-10 transform -rotate-2 anim-hidden">
+                Atlas Ravi
+            </h2>
+
+            <!-- Rodapé / Detalhes do Evento -->
+            <div id="footer-details" class="w-full flex items-center justify-between border-t border-b border-gray-300/50 py-3 md:py-4 font-body anim-hidden">
+                
+                <!-- Data -->
+                <div class="flex-1 flex flex-col items-center px-1 md:px-2">
+                    <span class="text-text-blue font-bold tracking-widest text-[0.65rem] sm:text-xs md:text-base">ABRIL</span>
+                    <span class="text-text-orange text-3xl sm:text-5xl md:text-6xl my-0 md:my-1">17</span>
+                    <span class="text-text-green font-semibold text-xs sm:text-lg md:text-xl">Sábado</span>
+                </div>
+
+                <!-- Divisória 1 -->
+                <div class="w-px h-16 sm:h-20 md:h-24 bg-gray-300"></div>
+
+                <!-- Localização -->
+                <div class="flex-[1.5] flex flex-col items-center px-2 md:px-4">
+                    <span class="text-gray-500 tracking-widest text-[0.65rem] sm:text-xs md:text-base mb-1 md:mb-2">LOCAL</span>
+                    <span class="text-gray-800 font-semibold text-[0.7rem] sm:text-sm md:text-base leading-snug">
+                        Casa da Avó Loira Gleyce<br>
+                        <span class="text-[0.6rem] sm:text-xs md:text-sm text-gray-600 font-normal">no Bairro Perpétuo Socorro</span>
+                    </span>
+                </div>
+
+                <!-- Divisória 2 -->
+                <div class="w-px h-16 sm:h-20 md:h-24 bg-gray-300"></div>
+
+                <!-- Horário -->
+                <div class="flex-1 flex flex-col items-center px-1 md:px-2">
+                    <span class="text-text-green font-bold tracking-widest text-[0.65rem] sm:text-xs md:text-base">ÀS</span>
+                    <span class="text-text-orange text-3xl sm:text-5xl md:text-6xl my-0 md:my-1">15</span>
+                    <span class="text-text-blue font-semibold text-xs sm:text-lg md:text-xl">Horas</span>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Lado Direito: Pista de Corrida Integrada -->
+        <!-- O fundo da pista é transparente para o quadriculado aparecer -->
+        <div id="track-container" class="w-16 sm:w-24 md:w-36 relative border-l-2 border-gray-300 border-dashed" style="opacity: 0; transition: opacity 2s ease;">
+            <canvas id="retroGameCanvas" class="absolute inset-0 w-full h-full"></canvas>
+        </div>
+
+    </div>
+
+    <script>
+        // --- Lógica de Sequência de Animações (Tempo Estendido) ---
+        window.onload = () => {
+            const car = document.getElementById('main-car');
+            const card = document.getElementById('main-card');
+            const track = document.getElementById('track-container');
+            const titleSpans = document.querySelectorAll('#title-text span');
+            const intro = document.getElementById('intro-text');
+            const nameText = document.getElementById('name-text');
+            const footer = document.getElementById('footer-details');
+
+            // 1. Inicia o script do joguinho (ele só aparece quando a opacidade for 1)
+            initRetroGame();
+
+            // 2. Animação do Carro Chegando LENTAMENTE (Estacionando)
+            setTimeout(() => {
+                car.style.animation = 'driveIn 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards';
+                car.classList.remove('anim-hidden');
+            }, 800);
+
+            // 3. Revelar Fundo Quadriculado e Pista Lateral
+            setTimeout(() => {
+                card.classList.add('bg-grid', 'border', 'border-gray-200', 'shadow-2xl', 'bg-white');
+                track.style.opacity = '1'; 
+                window.dispatchEvent(new Event('resize')); // Recalcula a largura do canvas agora que está visível
+            }, 3300);
+
+            // 4. Animar Letras do BEEP BEEP (Uma por uma de forma mais cadenciada)
+            setTimeout(() => {
+                titleSpans.forEach((span, index) => {
+                    span.style.animation = `popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards ${index * 0.15}s`;
+                });
+            }, 4000);
+
+            // 5. Animar o Texto Introdutório (Efeito Digitando)
+            setTimeout(() => {
+                intro.classList.remove('anim-hidden');
+                intro.style.opacity = '1';
+                
+                const textToType = "Ligue os motores e acelere para a minha festinha!<br>Estou completando 2 aninhos, e quero que você venha comemorar comigo!";
+                let i = 0;
+                
+                function typeWriter() {
+                    if (i < textToType.length) {
+                        // Verifica se é uma quebra de linha (tag <br>)
+                        if (textToType.substring(i, i + 4) === '<br>') {
+                            intro.innerHTML += '<br>';
+                            i += 4;
+                        } else {
+                            intro.innerHTML += textToType.charAt(i);
+                            i++;
+                        }
+                        setTimeout(typeWriter, 35); // Velocidade de 35ms por letra
+                    }
+                }
+                typeWriter();
+            }, 6000);
+
+            // 6. Animar Nome do Aniversariante (Espera a digitação terminar)
+            setTimeout(() => {
+                nameText.style.animation = 'popIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards';
+                // Restaura a inclinação
+                setTimeout(() => nameText.style.transform = 'scale(1) rotate(-2deg)', 1000);
+            }, 10500);
+
+            // 7. Animar Rodapé com os Detalhes
+            setTimeout(() => {
+                footer.style.animation = 'fadeInUp 1s ease forwards';
+            }, 11800);
+        };
+
+        // --- LÓGICA DO JOGO RETRO NA PISTA LATERAL ---
+        function initRetroGame() {
+            const canvas = document.getElementById('retroGameCanvas');
+            const trackContainer = document.getElementById('track-container');
+            const ctx = canvas.getContext('2d');
+            let width, height, laneWidth;
+            let lanes = [];
+
+            function resize() {
+                // Pega a largura exata da div lateral
+                width = canvas.width = trackContainer.clientWidth || 100;
+                height = canvas.height = trackContainer.clientHeight || window.innerHeight;
+                
+                laneWidth = width / 3;
+                lanes = [laneWidth / 2, laneWidth * 1.5, laneWidth * 2.5];
+                
+                // Recalcula o tamanho do player de acordo com a largura da coluna
+                player.width = laneWidth * 0.6;
+                player.height = player.width * 1.5;
+                player.y = height - player.height - 20;
+                player.targetX = lanes[player.lane] - player.width / 2;
+            }
+            window.addEventListener('resize', resize);
+            
+            let player = {
+                lane: 1,
+                y: 0, width: 0, height: 0, targetX: 0
+            };
+
+            // Setup Inicial
+            resize();
+
+            let obstacles = [];
+            let frame = 0;
+            const colors = ['#f48120', '#4a4a4a', '#84cc9c', '#fcd34d'];
+
+            function update() {
+                frame++;
+                
+                // Velocidade baseada na altura para ser suave em qualquer dispositivo
+                let speed = height * 0.0035; 
+
+                // Mover o player suavemente entre as faixas
+                const targetX = lanes[player.lane] - player.width / 2;
+                player.targetX += (targetX - player.targetX) * 0.1; // Suavidade da curva
+
+                // Criar carrinhos adversários (Com intervalo maior)
+                if (frame % 140 === 0) {
+                    let objLane = Math.floor(Math.random() * 3);
+                    obstacles.push({
+                        lane: objLane,
+                        y: -80,
+                        width: player.width,
+                        height: player.height,
+                        color: colors[Math.floor(Math.random() * colors.length)]
+                    });
+                }
+
+                // IA Simples de Desvio
+                let dangerZone = player.y - (player.height * 3);
+                let imminentDanger = obstacles.find(obs => obs.lane === player.lane && obs.y > dangerZone && obs.y < player.y);
+                
+                if (imminentDanger) {
+                    let safeLanes = [0, 1, 2].filter(l => !obstacles.some(obs => obs.lane === l && obs.y > dangerZone - 50 && obs.y < player.y + player.height));
+                    if (safeLanes.length > 0) {
+                        safeLanes.sort((a, b) => Math.abs(a - player.lane) - Math.abs(b - player.lane));
+                        player.lane = safeLanes[0];
+                    }
+                }
+
+                // Descer os carrinhos
+                for (let i = obstacles.length - 1; i >= 0; i--) {
+                    obstacles[i].y += speed;
+                    if (obstacles[i].y > height + 50) {
+                        obstacles.splice(i, 1);
+                    }
+                }
+            }
+
+            function draw() {
+                // ClearRect permite que o fundo quadriculado (CSS) apareça por trás!
+                ctx.clearRect(0, 0, width, height);
+
+                // Desenhar linhas da pista (Apenas os divisores das 3 faixas)
+                let speed = height * 0.0035; 
+                ctx.strokeStyle = 'rgba(43, 155, 198, 0.4)'; // Azul clarinho
+                ctx.lineWidth = 1.5;
+                ctx.setLineDash([15, 20]);
+                ctx.lineDashOffset = -frame * speed;
+
+                for(let i = 1; i < 3; i++) {
+                    let x = laneWidth * i;
+                    ctx.beginPath();
+                    ctx.moveTo(x, 0);
+                    ctx.lineTo(x, height);
+                    ctx.stroke();
+                }
+
+                // Desenhar outros carrinhos
+                obstacles.forEach(obs => {
+                    let obsX = lanes[obs.lane] - obs.width / 2;
+                    drawRetroCar(ctx, obsX, obs.y, obs.width, obs.height, obs.color);
+                });
+
+                // Desenhar nosso carrinho (Azul)
+                drawRetroCar(ctx, player.targetX, player.y, player.width, player.height, '#2298c3');
+
+                requestAnimationFrame(() => {
+                    update();
+                    draw();
+                });
+            }
+
+            function drawRetroCar(ctx, x, y, w, h, mainColor) {
+                const block = w / 3;
+                
+                // Corpo
+                ctx.fillStyle = mainColor;
+                ctx.fillRect(x + block, y, block, h);
+                
+                // Pneus
+                ctx.fillStyle = '#4a4a4a'; 
+                ctx.fillRect(x, y + block, block, block);
+                ctx.fillRect(x + w - block, y + block, block, block);
+                ctx.fillRect(x, y + h - block*2, block, block);
+                ctx.fillRect(x + w - block, y + h - block*2, block, block);
+                
+                // Vidro
+                ctx.fillStyle = '#99d6ea';
+                ctx.fillRect(x + block, y + block + (block*0.5), block, block);
+            }
+
+            draw();
+        }
+    </script>
+</body>
+</html>
